@@ -1,13 +1,82 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'SourceSansPro', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: 'SourceSansPro';
+  src: local('SourceSansPro'), url(../assets/fonts/SourceSansPro-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SourceSansPro';
+  font-style: italic;
+  src: local('SourceSansPro'), url(../assets/fonts/SourceSansPro-Italic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SourceSansPro';
+  font-weight: 100;
+  src: local('SourceSansPro'), url(../assets/fonts/SourceSansPro-ExtraLight.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SourceSansPro';
+  font-weight: 100;
+  font-style: italic;
+  src: local('SourceSansPro'), url(../assets/fonts/SourceSansPro-ExtraLightItalic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SourceSansPro';
+  font-weight: 300;
+  src: local('SourceSansPro'), url(../assets/fonts/SourceSansPro-Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SourceSansPro';
+  font-weight: 300;
+  font-style: italic;
+  src: local('SourceSansPro'), url(../assets/fonts/SourceSansPro-LightItalic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SourceSansPro';
+  font-weight: 600;
+  src: local('SourceSansPro'), url(../assets/fonts/SourceSansPro-SemiBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SourceSansPro';
+  font-weight: 600;
+  font-style: italic;
+  src: local('SourceSansPro'), url(../assets/fonts/SourceSansPro-SemiBoldItalic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SourceSansPro';
+  font-weight: 700;
+  src: local('SourceSansPro'), url(../assets/fonts/SourceSansPro-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SourceSansPro';
+  font-weight: 700;
+  font-style: italic;
+  src: local('SourceSansPro'), url(../assets/fonts/SourceSansPro-BoldItalic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SourceSansPro';
+  font-weight: 900;
+  src: local('SourceSansPro'), url(../assets/fonts/SourceSansPro-Black.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SourceSansPro';
+  font-weight: 900;
+  font-style: italic;
+  src: local('SourceSansPro'), url(../assets/fonts/SourceSansPro-BlackItalic.ttf) format('truetype');
 }
