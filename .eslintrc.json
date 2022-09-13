@@ -1,0 +1,48 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true,
+    "jest": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "prettier"
+  ],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended",
+    "react-app/jest",
+    "plugin:react-hooks/recommended",
+    "plugin:react/recommended",
+    "prettier/prettier"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "rules": {
+    "no-trailing-spaces": "error",
+    "eqeqeq": [ "error", "smart" ],
+    "no-console": "error",
+    "no-lonely-if": "error",
+    "no-nested-ternary": "error",
+    "no-negated-condition": "error",
+    "prefer-spread": "error",
+    "rest-spread-spacing": [ "error", "never" ],
+
+    "prettier/prettier": "error"
+  }
+}
