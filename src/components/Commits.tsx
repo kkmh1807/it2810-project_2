@@ -22,7 +22,7 @@ function Commits() {
   const [apiKey, setApiKey] = useState('');
 
   function fetchCommits() {
-    //Ikke la den fetche etter at den alledrede er fetcha
+    // TODO Ikke la den fetche etter at den alledrede er fetcha
     fetch(`https://gitlab.stud.idi.ntnu.no/api/v4/projects/${id}/repository/commits`, {
       headers: {
         Authorization: `Bearer ${apiKey} `
@@ -31,6 +31,7 @@ function Commits() {
       if (response.ok) {
         const data: Commit[] = await response.json();
         setCommits(data);
+        console.log(data);
       }
     });
   }
@@ -44,7 +45,8 @@ function Commits() {
           <div key={i}>
             <h1>{commit.author_name}</h1>
             <p>{commit.committer_email}</p>
-            <p>{commit.title}</p>
+            <p>{commit.message}</p>
+            <p>{commit.short_id}</p>
           </div>
         ))}
     </div>

@@ -1,12 +1,16 @@
 import React from 'react';
 
 import './App.css';
-import Commits from './components/Commits';
+import Issues from './components/Issues';
+// import Commits from './components/Commits';
+/* import MergeRequests from './components/MergeRequests'; */
 
 function App() {
   return (
     <div>
-      <Commits />
+      {/* <Commits /> */}
+      {/* <MergeRequests /> */}
+      <Issues />
     </div>
   );
 }
