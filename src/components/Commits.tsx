@@ -12,8 +12,6 @@ interface Commit {
   committed_date: string;
   created_at: string;
   message: string;
-  parent_ids: string[];
-  web_url: string;
 }
 
 function Commits() {
@@ -45,8 +43,9 @@ function Commits() {
           <div key={i}>
             <h1>{commit.author_name}</h1>
             <p>{commit.committer_email}</p>
-            <p>{commit.message}</p>
+            <p>{commit.title}</p>
             <p>{commit.short_id}</p>
+            <p>Last updated: {commit.committed_date}</p>
           </div>
         ))}
     </div>

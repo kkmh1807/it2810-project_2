@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
+import { Person } from '../models';
 
 interface MR {
   title: string;
+  reviewer?: Person;
+  assignee?: Person;
+  author?: Person;
+  source_branch: string;
+  target_branch?: string;
+  state: string;
 }
 
 function MergeRequests() {
@@ -18,6 +25,7 @@ function MergeRequests() {
     }).then(async (response) => {
       if (response.ok) {
         const data: MR[] = await response.json();
+        console.log(data);
         setMr(data);
       }
     });
@@ -30,9 +38,9 @@ function MergeRequests() {
         mr.map((mr, i) => (
           <div key={i}>
             <h1>{mr.title}</h1>
-            {/* <p>{mr.committer_email}</p>
-            <p>{mr.message}</p>
-            <p>{mr.short_id}</p> */}
+            <p>{mr.source_branch}</p>
+            <p>{mr.author?.name}</p>
+            <p>{mr.reviewer?.name}</p>
           </div>
         ))}
     </div>

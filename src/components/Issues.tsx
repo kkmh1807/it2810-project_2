@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-
-interface Person {
-  id: number;
-  username: string;
-}
+import { Person } from '../models';
 
 interface Issue {
   title: string;
@@ -41,7 +37,6 @@ function Issues() {
           <div key={i}>
             <h1>{issues.title}</h1>
             <p>{issues.state}</p>
-            <p>{issues.description}</p>
             <p>{issues.author.username}</p>
             <p>{issues.assignee?.username}</p>
           </div>
