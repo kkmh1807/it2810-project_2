@@ -1,41 +1,18 @@
-import React, { useState } from 'react';
-import { Person } from '../models';
-
-interface MR {
-  title: string;
-  reviewer?: Person;
-  assignee?: Person;
-  author?: Person;
-  source_branch: string;
-  target_branch?: string;
-  state: string;
-}
+import React from 'react';
+import { useApiContext } from '../context/ApiContext';
+import { MR } from '../types/models';
+import useGitlabData from '../hooks/useGitlabData';
 
 function MergeRequests() {
-  const id = encodeURIComponent('it2810-h22/Team-37/project_2');
-  const [mr, setMr] = useState<MR[] | undefined>();
-  const [apiKey, setApiKey] = useState('');
+  const { setApiKey } = useApiContext();
+  const { data, fetchData } = useGitlabData<MR[]>('/merge_requests');
 
-  function fetchMr() {
-    // TODO Ikke la den fetche etter at den alledrede er fetcha
-    fetch(`https://gitlab.stud.idi.ntnu.no/api/v4/projects/${id}/merge_requests`, {
-      headers: {
-        Authorization: `Bearer ${apiKey} `
-      }
-    }).then(async (response) => {
-      if (response.ok) {
-        const data: MR[] = await response.json();
-        console.log(data);
-        setMr(data);
-      }
-    });
-  }
   return (
     <div>
       <input type="text" onChange={(e) => setApiKey(e.target.value)} />
-      <button onClick={fetchMr}>Start Browsing</button>
-      {mr &&
-        mr.map((mr, i) => (
+      <button onClick={fetchData}>Start Browsing MR</button>
+      {data &&
+        data.map((mr, i) => (
           <div key={i}>
             <h1>{mr.title}</h1>
             <p>{mr.source_branch}</p>
