@@ -1,16 +1,16 @@
-import React from 'react';
-import { useApiContext } from '../context/ApiContext';
+import React, { useEffect } from 'react';
 import { MR } from '../types/models';
 import useGitlabData from '../hooks/useGitlabData';
 
 function MergeRequests() {
-  const { setApiKey } = useApiContext();
   const { data, fetchData } = useGitlabData<MR[]>('/merge_requests');
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div>
-      <input type="text" onChange={(e) => setApiKey(e.target.value)} />
-      <button onClick={fetchData}>Start Browsing MR</button>
       {data &&
         data.map((mr, i) => (
           <div key={i}>

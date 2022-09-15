@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Issue } from '../types/models';
 import useGitlabData from '../hooks/useGitlabData';
-import { useApiContext } from '../context/ApiContext';
 
 function Issues() {
-  const { setApiKey } = useApiContext();
   const { data, fetchData } = useGitlabData<Issue[]>('/issues');
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div>
-      <input type="text" onChange={(e) => setApiKey(e.target.value)} />
-      <button onClick={fetchData}>Start Browsing issues</button>
       {data &&
         data.map((issues, i) => (
           <div key={i}>
