@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useApiContext } from '../context/ApiContext';
 import { Link } from 'react-router-dom';
+import Logo from '../assets/images/logo_text.svg';
+import '../styles/Home.css';
 
 function Home() {
   const { setApiKey, setUrl, setRepo } = useApiContext();
@@ -26,11 +28,22 @@ function Home() {
 
   return (
     <>
-      <input type="text" placeholder="Enter API key here.." onChange={(e) => setApiKey(e.target.value)} />
-      <input type="text" placeholder="Enter URL here.." onChange={(e) => stripRepo(e.target.value)} />
-      <Link to="/overview" onClick={setContext}>
-        Start browsing
-      </Link>
+      <div className="landing-page-container">
+        <img src={Logo} />
+        <label htmlFor="apiInput">Enter your API-key</label>
+        <input id="apiInput" type="text" placeholder="<your_access_token>" onChange={(e) => setApiKey(e.target.value)} required />
+        <label htmlFor="apiInURLInputput">Enter your URL</label>
+        <input
+          id="URLInput"
+          type="text"
+          placeholder="https://gitlab.your.repo.url/projectName"
+          onChange={(e) => stripRepo(e.target.value)}
+          required
+        />
+        <Link className="start-btn" to="/overview" onClick={setContext}>
+          Start browsing
+        </Link>
+      </div>
     </>
   );
 }
