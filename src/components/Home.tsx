@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApiContext } from '../context/ApiContext';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/images/logo_text.svg';
 import '../styles/Home.css';
 
@@ -8,6 +8,7 @@ function Home() {
   const { setApiKey, setUrl, setRepo } = useApiContext();
   const [strippedUrl, setStrippedUrl] = useState('');
   const [strippedRepo, setStrippedRepo] = useState('');
+  const navigate = useNavigate();
 
   //   Strip the repo from input from user
   function stripRepo(input: string) {
@@ -22,27 +23,35 @@ function Home() {
 
   const setContext = () => {
     // Set the input from the user into application context.
+
     setRepo(encodeURIComponent(strippedRepo));
     setUrl(strippedUrl);
+    //trenger preventDefault();
+    navigate('/overview');
   };
 
   return (
     <>
       <div className="landing-page-container">
         <img src={Logo} />
-        <label htmlFor="apiInput">Enter your API-key</label>
-        <input id="apiInput" type="text" placeholder="<your_access_token>" onChange={(e) => setApiKey(e.target.value)} required />
-        <label htmlFor="apiInURLInputput">Enter your URL</label>
-        <input
-          id="URLInput"
-          type="text"
-          placeholder="https://gitlab.your.repo.url/projectName"
-          onChange={(e) => stripRepo(e.target.value)}
-          required
-        />
-        <Link className="start-btn" to="/overview" onClick={setContext}>
+        <form onSubmit={setContext}>
+          <label htmlFor="apiInput">Enter your API-key</label>
+          <input id="apiInput" type="text" placeholder="<your_access_token>" onChange={(e) => setApiKey(e.target.value)} required />
+          <label htmlFor="apiInURLInputput">Enter your URL</label>
+          <input
+            id="URLInput"
+            type="text"
+            placeholder="https://gitlab.your.repo.url/projectName"
+            onChange={(e) => stripRepo(e.target.value)}
+            required
+          />
+          <button type="submit" className="start-btn">
+            Start Browsing
+          </button>
+        </form>
+        {/* <Link className="start-btn" to="/overview" onClick={setContext}>
           Start browsing
-        </Link>
+        </Link> */}
       </div>
     </>
   );
