@@ -1,0 +1,45 @@
+.page-header {
+  width: calc(100% - 1rem);
+  padding: 0.5rem;
+  display: flex;
+  align-items: end;
+}
+
+.page-header > img {
+  width: 275px;
+}
+
+.page-header > h1 {
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tab-view {
+  width: calc(100% - 4rem);
+  padding: 2rem;
+}
+
+.tab-list {
+  width: 100%;
+  display: flex;
+}
+
+.tab-link {
+  padding: 1rem 0.5rem;
+  font-weight: 300;
+  color: black;
+  width: 25%;
+  text-align: center;
+}
+
+.tab-link.active {
+  background-color: #F5F5F5;
+  color: #FC6D26;
+  font-weight: 400;
+}
+
+.navigation-content {
+  background-color: #F5F5F5;
+  padding: 0.5rem;
+}
