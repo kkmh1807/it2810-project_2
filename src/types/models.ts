@@ -6,11 +6,13 @@ export interface Person {
 }
 
 export interface Issue {
+  iid: number;
   title: string;
   state: string;
   description: string;
   author: Person;
   assignee?: Person;
+  assignees?: Person[];
 }
 
 export interface MR {
