@@ -19,7 +19,7 @@ function Issues() {
   }, []);
 
   return (
-    <div className="issuetihi">
+    <div className="issues-container">
       {data &&
         data.map((issues, i) => (
           <a key={i} href={generateURL(issues.iid.toString())} target="_blank" rel="noreferrer">
