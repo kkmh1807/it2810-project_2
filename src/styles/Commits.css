@@ -23,6 +23,7 @@
   min-height: 186px;
   min-width: 330px;
   max-width: 330px;
+  background-color: white;
 }
 
 .commit-card:hover {
