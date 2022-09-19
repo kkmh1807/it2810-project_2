@@ -5,6 +5,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  position: relative;
+  min-height: 100vh;
+}
+
 @font-face {
   font-family: 'SourceSansPro';
   src: local('SourceSansPro'), url(./assets/fonts/SourceSansPro-Regular.ttf) format('truetype');
