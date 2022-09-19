@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useGitlabData from '../hooks/useGitlabData';
-import { useApiContext } from '../context/ApiContext';
 import { Commit } from '../types/models';
 
 function Commits() {
-  const { setApiKey } = useApiContext();
   const { data, fetchData } = useGitlabData<Commit[]>('/repository/commits');
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div>
-      <input type="text" onChange={(e) => setApiKey(e.target.value)} />
-      <button onClick={fetchData}>Start Browsing commits</button>
       {data &&
         data.map((commit, i) => (
           <div key={i}>

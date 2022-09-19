@@ -26,8 +26,8 @@ export const useApiContext = (): ApiContextType => useContext(ApiContext);
 
 const ApiContextProvider = ({ children }: ApiContextProps) => {
   const [apiKey, setApiKey] = useState('');
-  const [url, setUrl] = useState('https://gitlab.stud.idi.ntnu.no');
-  const [repo, setRepo] = useState(encodeURIComponent('it2810-h22/Team-37/project_2'));
+  const [url, setUrl] = useState('');
+  const [repo, setRepo] = useState('');
 
   return (
     <ApiContext.Provider

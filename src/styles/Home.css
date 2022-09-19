@@ -1,0 +1,82 @@
+.landing-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.landing-page-container > img {
+  width: 400px;
+  cursor: pointer;
+}
+
+.landing-page-container > form {
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-page-container > form > input {
+  width: 77%;
+  height: 50px;
+  border-radius: 20px;
+
+  padding: 5px;
+  text-indent: 3%;
+  margin-top: 1%;
+  margin-bottom: 3.5rem;
+  font-size: 16px;
+}
+
+.landing-page-container > form > label {
+  width: 80%;
+  text-indent: 5%;
+}
+
+.start-btn {
+  background-color: #fc6d26;
+  color: black;
+  width: 80%;
+  padding: 15px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 40px;
+}
+
+.start-btn:hover {
+  cursor: pointer;
+  background-color: #f96217;
+}
+
+.start-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+@media only screen and (max-width: 768px) {
+  .landing-page-container > img {
+    width: 300px;
+  }
+}
+
+@media only screen and (max-width: 426px) {
+  .start-btn {
+    width: 100%;
+  }
+  .landing-page-container > form > input {
+    width: 100%;
+    font-size: 0.85rem;
+  }
+
+  .landing-page-container > form > label {
+    font-size: 1.2rem;
+    text-indent: 3%;
+    width: 100%;
+  }
+}
