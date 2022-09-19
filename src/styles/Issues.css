@@ -2,16 +2,25 @@
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   grid-gap: 5rem;
+  background-color: white;
   border: 2px solid #d9d9d9;
   border-radius: 10px;
   margin: 1%;
   padding: 1%;
 }
 
-.issuetihi > a {
+.issues-card:hover {
+  background-color: #d9d9d9;
+}
+
+.issues-container > a {
   text-decoration: none;
   color: black;
   font-weight: light;
+}
+
+.issues-card > h1 {
+  font-size: 2rem;
 }
 
 .issues-card > h2 {
@@ -20,4 +29,36 @@
 
 .issues-card > p {
   text-align: right;
+}
+
+@media only screen and (max-width: 768px) {
+  .issues-card {
+    grid-gap: 1rem;
+  }
+  .issues-card > h1 {
+    font-size: 1.2rem;
+  }
+  .issues-card > h2 {
+    font-size: 0.9rem;
+  }
+
+  .issues-card > p {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 320) {
+  /* .issues-container {
+    grid-gap: rem;
+  } */
+  .issues-card > h1 {
+    font-size: 1rem;
+  }
+  .issues-card > h2 {
+    font-size: 0.7rem;
+  }
+
+  .issues-card > p {
+    font-size: 0.7rem;
+  }
 }
