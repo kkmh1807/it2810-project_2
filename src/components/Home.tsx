@@ -21,12 +21,12 @@ function Home() {
     setStrippedRepo(repo);
   }
 
-  const setContext = () => {
+  const setContext = (e: Event) => {
     // Set the input from the user into application context.
 
     setRepo(encodeURIComponent(strippedRepo));
     setUrl(strippedUrl);
-    //trenger preventDefault();
+    e.preventDefault();
     navigate('/overview');
   };
 
@@ -34,7 +34,7 @@ function Home() {
     <>
       <div className="landing-page-container">
         <img src={Logo} />
-        <form onSubmit={setContext}>
+        <form onSubmit={() => setContext}>
           <label htmlFor="apiInput">Enter your API-key</label>
           <input id="apiInput" type="text" placeholder="<your_access_token>" onChange={(e) => setApiKey(e.target.value)} required />
           <label htmlFor="apiInURLInputput">Enter your URL</label>
