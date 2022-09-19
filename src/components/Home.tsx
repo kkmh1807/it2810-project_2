@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { useApiContext } from '../context/ApiContext';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/images/logo_text.svg';
@@ -21,39 +21,42 @@ function Home() {
     setStrippedRepo(repo);
   }
 
-  const setContext = (e: Event) => {
+  const setContext = (e: FormEvent) => {
     // Set the input from the user into application context.
-
+    e.preventDefault();
     setRepo(encodeURIComponent(strippedRepo));
     setUrl(strippedUrl);
-    e.preventDefault();
+
     navigate('/overview');
   };
 
   return (
-    <>
-      <div className="landing-page-container">
-        <img src={Logo} />
-        <form onSubmit={() => setContext}>
-          <label htmlFor="apiInput">Enter your API-key</label>
-          <input id="apiInput" type="text" placeholder="<your_access_token>" onChange={(e) => setApiKey(e.target.value)} required />
-          <label htmlFor="apiInURLInputput">Enter your URL</label>
-          <input
-            id="URLInput"
-            type="text"
-            placeholder="https://gitlab.your.repo.url/projectName"
-            onChange={(e) => stripRepo(e.target.value)}
-            required
-          />
-          <button type="submit" className="start-btn">
-            Start Browsing
-          </button>
-        </form>
-        {/* <Link className="start-btn" to="/overview" onClick={setContext}>
-          Start browsing
-        </Link> */}
-      </div>
-    </>
+    <div className="landing-page-container">
+      <img src={Logo} />
+      <form onSubmit={(e) => setContext(e)}>
+        <label htmlFor="apiInput">Enter your API-key</label>
+        <input
+          id="apiInput"
+          type="text"
+          placeholder="<your_access_token>"
+          pattern="glpat-[A-Za-z0-9_-]{20}"
+          onChange={(e) => setApiKey(e.target.value)}
+          required
+        />
+        <label htmlFor="apiInURLInputput">Enter your URL</label>
+        <input
+          id="URLInput"
+          type="text"
+          placeholder="https://gitlab.your.repo.domain/projectName"
+          pattern="https://gitlab\..*/.*"
+          onChange={(e) => stripRepo(e.target.value)}
+          required
+        />
+        <button type="submit" className="start-btn">
+          Start Browsing
+        </button>
+      </form>
+    </div>
   );
 }
 
