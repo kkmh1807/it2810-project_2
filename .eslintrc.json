@@ -40,6 +40,8 @@
     "prefer-spread": "error",
     "rest-spread-spacing": ["error", "never"],
 
+    "no-unused-vars": "off",
+
     "prettier/prettier": "error"
   }
 }
