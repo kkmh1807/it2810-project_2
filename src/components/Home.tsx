@@ -16,7 +16,6 @@ function Home() {
     let repo = input.split('/')[3];
     for (let i = 4; i < input.split('/').length; i++) {
       repo = repo + '/' + input.split('/')[i];
-      console.log(repo);
     }
     setStrippedRepo(repo);
   }
