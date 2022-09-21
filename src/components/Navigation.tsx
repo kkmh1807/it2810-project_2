@@ -1,9 +1,10 @@
 import React, { FC, ReactNode, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from '../assets/images/logo_text.svg';
 import { useApiContext } from '../context/ApiContext';
 import ambourgar from '../assets/icons/ambourgar.svg';
 import xMark from '../assets/icons/x-mark.svg';
+import RedirectIcon from '../assets/icons/redirectIcon.svg';
 import '../styles/Navigation.css';
 
 interface NavigationProps {
@@ -18,6 +19,7 @@ const routesMap: Record<string, string> = {
 };
 
 const Navigation: FC<NavigationProps> = ({ children }) => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { repo } = useApiContext();
 
@@ -26,11 +28,31 @@ const Navigation: FC<NavigationProps> = ({ children }) => {
 
   const [showTabs, setShowTabs] = useState(false);
 
+  const goToLandingPage = () => {
+    navigate('/');
+  };
+
+  const LinkData = useApiContext();
+
+  const generateGitlabUrl = () => {
+    return `${LinkData.url}/${decodeURIComponent(LinkData.repo)}`;
+  };
+
   return (
     <main className="navigation">
       <header className="page-header">
-        <img src={Logo} />
-        <h1>{projectName}</h1>
+        <div>
+          <img onClick={goToLandingPage} src={Logo} />
+          <Link to="/">Change repository</Link>
+        </div>
+        <div className="project-title-group">
+          <h1 id="project-title">{projectName}</h1>
+          <a rel="noreferrer" target="_blank" href={generateGitlabUrl()}>
+            Go to gitlab
+            <img src={RedirectIcon} id="icon" />
+          </a>
+        </div>
+        <div></div>
       </header>
       <section className="tab-view">
         <div className={`current-tab ${showTabs ? 'open' : ''}`}>
