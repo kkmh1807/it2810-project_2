@@ -23,6 +23,7 @@ export interface MR {
   source_branch: string;
   target_branch?: string;
   state: string;
+  iid: number;
 }
 
 export interface Commit {

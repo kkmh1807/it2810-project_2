@@ -8,8 +8,13 @@ function Commits() {
   const [chosenBranch, setChosenBranch] = useState('main');
   const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?ref_name=${chosenBranch}`);
   const branches = useGitlabData<{ name: string }[]>('/repository/branches');
-
+  const LinkData = useApiContext();
+  const endpoint = '/commit/';
   console.log(data);
+
+  function urlToGitlab(endpoint: string, commitId: string) {
+    return `${LinkData.url}/${decodeURIComponent(LinkData.repo)}/-${endpoint}${commitId}`;
+  }
 
   useEffect(() => {
     fetchData();
@@ -18,12 +23,6 @@ function Commits() {
   useEffect(() => {
     branches.fetchData();
   }, []);
-
-  const LinkData = useApiContext();
-
-  function urlToGitlab(commitId: string) {
-    return `${LinkData.url}/${decodeURIComponent(LinkData.repo)}/-/commit/${commitId}`;
-  }
 
   return (
     <>
@@ -40,7 +39,7 @@ function Commits() {
       <div className="card-container">
         {data &&
           data.map((commit, i) => (
-            <a className="card-link" href={urlToGitlab(commit.short_id)} key={i} rel="noreferrer" target="_blank">
+            <a className="card-link" href={urlToGitlab(endpoint, commit.short_id)} key={i} rel="noreferrer" target="_blank">
               <div className="commit-card">
                 <p className="auth-name">{commit.author_name}</p>
                 <p className="title">{commit.title}</p>
