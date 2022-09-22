@@ -11,11 +11,12 @@ function MergeRequests() {
     fetchData();
   }, []);
 
-  const LinkData = useApiContext();
+  const linkData = useApiContext();
 
-  function urlToGitlab(endpoint: string, commitId: string) {
-    return `${LinkData.url}/${decodeURIComponent(LinkData.repo)}/-${endpoint}${commitId}`;
+  function urlToGitlab(endpoint: string, Id: string) {
+    return `${linkData.url}/${decodeURIComponent(linkData.repo)}/-${endpoint}${Id}`;
   }
+
   return (
     <div className="Container">
       {data &&

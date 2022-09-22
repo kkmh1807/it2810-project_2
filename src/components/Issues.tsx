@@ -9,8 +9,8 @@ function Issues() {
   const linkData = useApiContext();
   const endpoint = '/issues/';
 
-  function urlToGitlab(endpoint: string, commitId: string) {
-    return `${linkData.url}/${decodeURIComponent(linkData.repo)}/-${endpoint}${commitId}`;
+  function urlToGitlab(endpoint: string, Id: string) {
+    return `${linkData.url}/${decodeURIComponent(linkData.repo)}/-${endpoint}${Id}`;
   }
 
   console.log(data);

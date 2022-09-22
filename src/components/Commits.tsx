@@ -8,12 +8,12 @@ function Commits() {
   const [chosenBranch, setChosenBranch] = useState('main');
   const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?ref_name=${chosenBranch}`);
   const branches = useGitlabData<{ name: string }[]>('/repository/branches');
-  const LinkData = useApiContext();
+  const linkData = useApiContext();
   const endpoint = '/commit/';
   console.log(data);
 
-  function urlToGitlab(endpoint: string, commitId: string) {
-    return `${LinkData.url}/${decodeURIComponent(LinkData.repo)}/-${endpoint}${commitId}`;
+  function urlToGitlab(endpoint: string, Id: string) {
+    return `${linkData.url}/${decodeURIComponent(linkData.repo)}/-${endpoint}${Id}`;
   }
 
   useEffect(() => {
