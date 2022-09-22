@@ -55,6 +55,7 @@
     width: 90%;
     height: 200px;
     margin-left: 0%;
+    padding: 0%;
   }
   .mrContainer > .mr > h1 {
     font-size: 1.2rem;
@@ -80,9 +81,6 @@
 }
 
 @media only screen and (max-width: 320px) {
-  /* .issues-container {
-      grid-gap: rem;
-    } */
   .mrContainer > .mr > h1 {
     font-size: 1rem;
   }
