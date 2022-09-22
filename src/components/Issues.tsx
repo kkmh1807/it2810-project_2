@@ -7,10 +7,11 @@ import { useApiContext } from '../context/ApiContext';
 function Issues() {
   const { data, fetchData } = useGitlabData<Issue[]>('/issues');
   const linkData = useApiContext();
+  const endpoint = '/issues/';
 
-  const generateURL = (issueId: string) => {
-    return `${linkData.url}/${decodeURIComponent(linkData.repo)}/-/issues/${issueId}`;
-  };
+  function urlToGitlab(endpoint: string, Id: string) {
+    return `${linkData.url}/${decodeURIComponent(linkData.repo)}/-${endpoint}${Id}`;
+  }
 
   console.log(data);
 
@@ -22,7 +23,7 @@ function Issues() {
     <div className="issues-container">
       {data &&
         data.map((issues, i) => (
-          <a key={i} href={generateURL(issues.iid.toString())} target="_blank" rel="noreferrer">
+          <a key={i} href={urlToGitlab(endpoint, issues.iid.toString())} target="_blank" rel="noreferrer">
             <div key={i} className="issues-card">
               <h1>{issues.title}</h1>
               <h2>{issues.state}</h2>
