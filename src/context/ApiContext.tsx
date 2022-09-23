@@ -4,7 +4,7 @@ interface ApiContextProps {
   children: ReactNode;
 }
 
-interface ApiContextType {
+export interface ApiContextType {
   apiKey: string;
   setApiKey: Dispatch<SetStateAction<string>>;
   url: string;
@@ -13,7 +13,7 @@ interface ApiContextType {
   setRepo: Dispatch<SetStateAction<string>>;
 }
 
-const ApiContext = createContext<ApiContextType>({
+export const ApiContext = createContext<ApiContextType>({
   apiKey: '',
   setApiKey: () => null,
   url: '',
