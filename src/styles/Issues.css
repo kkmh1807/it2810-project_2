@@ -20,6 +20,7 @@
 
 .issues-card > h1 {
   font-size: 1.4rem;
+  margin-right: 2rem;
 }
 
 .issues-card > h2 {
@@ -31,9 +32,6 @@
 
 .issues-card > p {
   text-align: right;
-}
-
-@media only screen and (max-width: 768px) {
 }
 
 @media only screen and (max-width: 425px) {
