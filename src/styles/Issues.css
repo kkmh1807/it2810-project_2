@@ -6,6 +6,7 @@
   border-radius: 10px;
   margin: 1%;
   padding: 1%;
+  align-items: center;
 }
 
 .issues-card:hover {
@@ -19,7 +20,8 @@
 }
 
 .issues-card > h1 {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  margin-right: 2rem;
 }
 
 .issues-card > h2 {

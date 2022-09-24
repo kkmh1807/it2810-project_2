@@ -3,6 +3,7 @@ import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
 import { useApiContext } from '../context/ApiContext';
 import '../styles/Commits.css';
+import '../styles/Selector.css';
 
 function Commits() {
   const [chosenBranch, setChosenBranch] = useState('main');
