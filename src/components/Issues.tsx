@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Issue } from '../types/models';
 import useGitlabData from '../hooks/useGitlabData';
 import { useApiContext } from '../context/ApiContext';
+import Selector from './Selector';
 import '../styles/Issues.css';
 import '../styles/Selector.css';
 
@@ -9,7 +10,7 @@ function Issues() {
   const { data, fetchData } = useGitlabData<Issue[]>('/issues');
   const linkData = useApiContext();
   const endpoint = '/issues/';
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState('opened');
   const states = Array.from(new Set(data?.map((issue) => issue.state)));
 
   const filteredData = filter ? data?.filter((issue) => issue.state === filter) : data;
@@ -24,14 +25,7 @@ function Issues() {
 
   return (
     <div className="issues-container">
-      <select className="select" value={filter} defaultValue={filter} onChange={(e) => setFilter(e.target.value)}>
-        <option value="">Alle</option>
-        {states.map((state, i) => (
-          <option key={i} value={state}>
-            {state}
-          </option>
-        ))}
-      </select>
+      <Selector value={filter} setValue={setFilter} values={states} />
       {filteredData &&
         filteredData.map((issues, i) => (
           <a key={i} href={urlToGitlab(endpoint, issues.iid.toString())} target="_blank" rel="noreferrer">
