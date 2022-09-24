@@ -1,7 +1,6 @@
 .issues-card {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  grid-gap: 5rem;
   background-color: white;
   border: 2px solid #d9d9d9;
   border-radius: 10px;
@@ -20,10 +19,13 @@
 }
 
 .issues-card > h1 {
-  font-size: 2rem;
+  font-size: 1.4rem;
 }
 
 .issues-card > h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  align-self: center;
   text-align: left;
 }
 
@@ -32,33 +34,32 @@
 }
 
 @media only screen and (max-width: 768px) {
+}
+
+@media only screen and (max-width: 425px) {
   .issues-card {
-    grid-gap: 1rem;
+    padding: 0.7rem;
+    grid-gap: 0;
   }
   .issues-card > h1 {
     font-size: 1.2rem;
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 1;
   }
   .issues-card > h2 {
     font-size: 0.9rem;
+    align-self: center;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
   }
-
   .issues-card > p {
     font-size: 0.9rem;
-  }
-}
-
-@media only screen and (max-width: 320) {
-  /* .issues-container {
-    grid-gap: rem;
-  } */
-  .issues-card > h1 {
-    font-size: 1rem;
-  }
-  .issues-card > h2 {
-    font-size: 0.7rem;
-  }
-
-  .issues-card > p {
-    font-size: 0.7rem;
+    align-self: center;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 2;
   }
 }
