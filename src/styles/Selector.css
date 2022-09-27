@@ -1,0 +1,10 @@
+.select {
+  width: 20%;
+  min-width: max-content;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 0.8rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 2px solid #d9d9d9;
+}

@@ -2,15 +2,20 @@ import React, { useEffect, useState } from 'react';
 import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
 import { useApiContext } from '../context/ApiContext';
+import Selector from './Selector';
 import '../styles/Commits.css';
+import '../styles/Selector.css';
 
 function Commits() {
   const [chosenBranch, setChosenBranch] = useState('main');
   const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?ref_name=${chosenBranch}`);
-  const branches = useGitlabData<{ name: string }[]>('/repository/branches');
   const linkData = useApiContext();
   const endpoint = '/commit/';
+
   console.log(data);
+
+  const branches = useGitlabData<{ name: string }[]>('/repository/branches');
+  const branchNames = Array.from(new Set(branches.data?.map((branch) => branch.name)));
 
   function urlToGitlab(endpoint: string, Id: string) {
     return `${linkData.url}/${decodeURIComponent(linkData.repo)}/-${endpoint}${Id}`;
@@ -28,13 +33,7 @@ function Commits() {
     <>
       <h1>
         Showing commits on
-        <select className="select" value={chosenBranch} defaultValue={chosenBranch} onChange={(e) => setChosenBranch(e.target.value)}>
-          {branches.data?.map((branch, i) => (
-            <option key={i} value={branch.name}>
-              {branch.name}
-            </option>
-          ))}
-        </select>
+        <Selector value={chosenBranch} setValue={setChosenBranch} values={branchNames} />
       </h1>
       <div className="card-container">
         {data &&
