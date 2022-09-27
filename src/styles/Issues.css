@@ -6,6 +6,7 @@
   border-radius: 10px;
   margin: 1%;
   padding: 1%;
+  align-items: center;
 }
 
 .issues-card:hover {
@@ -26,7 +27,6 @@
 .issues-card > h2 {
   font-size: 1.2rem;
   font-weight: 600;
-  align-self: center;
   text-align: left;
 }
 
@@ -45,18 +45,15 @@
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 1;
-    margin: 0;
   }
   .issues-card > h2 {
     font-size: 0.9rem;
-    align-self: center;
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 2;
   }
   .issues-card > p {
     font-size: 0.9rem;
-    align-self: center;
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 2;
