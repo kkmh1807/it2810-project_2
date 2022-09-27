@@ -15,7 +15,7 @@ class Selector extends React.Component<SelectorProps> {
       <select className="select" value={value} defaultValue={value} onChange={(e) => setValue(e.target.value)}>
         {values.map((value, i) => (
           <option key={i} value={value}>
-            {value}
+            {value.length > 15 ? value.substring(0, 20) + '...' : value}
           </option>
         ))}
       </select>
