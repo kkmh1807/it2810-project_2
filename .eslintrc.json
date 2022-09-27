@@ -31,14 +31,16 @@
     }
   },
   "rules": {
+    "react-hooks/exhaustive-deps": "off",
     "no-trailing-spaces": "error",
     "eqeqeq": ["error", "smart"],
-    "no-console": "on",
+    "no-console": "warn",
     "no-lonely-if": "error",
     "no-nested-ternary": "error",
     "no-negated-condition": "error",
     "prefer-spread": "error",
     "rest-spread-spacing": ["error", "never"],
+    "react/react-in-jsx-scope": "off",
 
     "no-unused-vars": "off",
 

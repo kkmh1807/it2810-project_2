@@ -3,7 +3,7 @@ import React from 'react';
 interface SelectorProps {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
-  values: any[];
+  values: string[];
 }
 
 class Selector extends React.Component<SelectorProps> {

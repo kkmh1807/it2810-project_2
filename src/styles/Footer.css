@@ -6,6 +6,7 @@
   background-color: #fc6d26;
   color: white;
   bottom: 0;
-  width: 100vw;
+  right: 0;
+  left: 0;
   height: 6rem;
 }
