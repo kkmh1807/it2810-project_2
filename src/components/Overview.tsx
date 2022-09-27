@@ -6,8 +6,10 @@ import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { generateColor } from '../utils/utils';
 
+const numberOfCommits = 200;
+
 const Overview = () => {
-  const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?all=true&per_page=${50}`);
+  const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?all=true&per_page=${numberOfCommits}`);
 
   useEffect(() => {
     fetchData();
@@ -32,7 +34,7 @@ const Overview = () => {
         accusamus ex alias sit. Ratione ipsum quibusdam, qui ducimus iste dolorem animi autem aut cumque laudantium laboriosam!
       </div>
       <div className="pie-chart-wrapper">
-        <p>Commits statistics for the 50 last commits in the repository</p>
+        <p>Commits statistics for the last {numberOfCommits} commits in the repository</p>
         <Pie
           data={{
             labels: Object.keys(chartData),
