@@ -31,6 +31,7 @@
     }
   },
   "rules": {
+    "react-hooks/exhaustive-deps": "off",
     "no-trailing-spaces": "error",
     "eqeqeq": ["error", "smart"],
     "no-console": "warn",
