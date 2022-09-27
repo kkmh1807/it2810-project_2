@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
 import { useApiContext } from '../context/ApiContext';
 import Selector from './Selector';
 import '../styles/Commits.css';
-import '../styles/Selector.css';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 function Commits() {
-  const [chosenBranch, setChosenBranch] = useState('main');
-  const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?ref_name=${chosenBranch}`);
+  const [chosenBranch, setChosenBranch] = useLocalStorage('current-branch', 'All branches');
+  const { data, fetchData } = useGitlabData<Commit[]>(
+    `/repository/commits?${chosenBranch === 'All branches' ? 'all=true' : `ref_name=${chosenBranch}`}`
+  );
   const linkData = useApiContext();
   const endpoint = '/commit/';
 
   const branches = useGitlabData<{ name: string }[]>('/repository/branches');
-  const branchNames = Array.from(new Set(branches.data?.map((branch) => branch.name)));
+  const branchNames = ['All branches', ...Array.from(new Set(branches.data?.map((branch) => branch.name))).reverse()];
 
   function urlToGitlab(endpoint: string, Id: string) {
     return `${linkData.url}/${decodeURIComponent(linkData.repo)}/-${endpoint}${Id}`;
