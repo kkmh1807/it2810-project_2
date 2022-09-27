@@ -12,8 +12,6 @@ function Commits() {
   const linkData = useApiContext();
   const endpoint = '/commit/';
 
-  console.log(data);
-
   const branches = useGitlabData<{ name: string }[]>('/repository/branches');
   const branchNames = Array.from(new Set(branches.data?.map((branch) => branch.name)));
 

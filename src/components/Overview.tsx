@@ -9,8 +9,6 @@ const Overview = () => {
     fetchData();
   }, []);
 
-  console.log(data);
-
   return <div>Overview</div>;
 };
 
