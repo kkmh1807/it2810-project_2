@@ -7,15 +7,15 @@ import '../styles/Commits.css';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 function Commits() {
-  const [chosenBranch, setChosenBranch] = useLocalStorage('current-branch', 'All branches');
-  const { data, fetchData } = useGitlabData<Commit[]>(
-    `/repository/commits?${chosenBranch === 'All branches' ? 'all=true' : `ref_name=${chosenBranch}`}`
+  const branches = useGitlabData<{ name: string; default: boolean }[]>('/repository/branches');
+  const branchNames = Array.from(new Set(branches.data?.map((branch) => branch.name))).reverse();
+  const [chosenBranch, setChosenBranch] = useLocalStorage(
+    'current-branch',
+    branches.data?.find((branch) => branch.default)?.name as string
   );
+  const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?ref_name=${chosenBranch}`);
   const linkData = useApiContext();
   const endpoint = '/commit/';
-
-  const branches = useGitlabData<{ name: string }[]>('/repository/branches');
-  const branchNames = ['All branches', ...Array.from(new Set(branches.data?.map((branch) => branch.name))).reverse()];
 
   function urlToGitlab(endpoint: string, Id: string) {
     return `${linkData.url}/${decodeURIComponent(linkData.repo)}/-${endpoint}${Id}`;
