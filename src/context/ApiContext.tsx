@@ -31,14 +31,17 @@ const ApiContextProvider = ({ children }: ApiContextProps) => {
 
   const updateApiKey = (value: string) => {
     sessionStorage.setItem('apiKey', value);
+    localStorage.clear();
     setApiKey(value);
   };
   const updateUrl = (value: string) => {
     sessionStorage.setItem('url', value);
+    localStorage.clear();
     setUrl(value);
   };
   const updateRepo = (value: string) => {
     sessionStorage.setItem('repo', value);
+    localStorage.clear();
     setRepo(value);
   };
 
