@@ -13,7 +13,7 @@ class Selector extends React.Component<SelectorProps> {
     const { setValue } = this.props;
     const { values } = this.props;
     return (
-      <select className="select" value={value} onChange={(e) => setValue(e.target.value)}>
+      <select data-testid="selector" className="select" value={value} onChange={(e) => setValue(e.target.value)}>
         {values.map((value, i) => (
           <option key={i} value={value}>
             {value.length > 15 ? value.substring(0, 20) + '...' : value}
