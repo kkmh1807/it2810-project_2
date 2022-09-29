@@ -1,4 +1,4 @@
-import React, { useContext, createContext, ReactNode, useState, SetStateAction, Dispatch } from 'react';
+import React, { useContext, createContext, ReactNode, useState } from 'react';
 
 interface ApiContextProps {
   children: ReactNode;
@@ -6,11 +6,11 @@ interface ApiContextProps {
 
 export interface ApiContextType {
   apiKey: string;
-  setApiKey: Dispatch<SetStateAction<string>>;
+  setApiKey: (val: string) => void;
   url: string;
-  setUrl: Dispatch<SetStateAction<string>>;
+  setUrl: (val: string) => void;
   repo: string;
-  setRepo: Dispatch<SetStateAction<string>>;
+  setRepo: (val: string) => void;
 }
 
 export const ApiContext = createContext<ApiContextType>({
@@ -25,19 +25,35 @@ export const ApiContext = createContext<ApiContextType>({
 export const useApiContext = (): ApiContextType => useContext(ApiContext);
 
 const ApiContextProvider = ({ children }: ApiContextProps) => {
-  const [apiKey, setApiKey] = useState('');
-  const [url, setUrl] = useState('');
-  const [repo, setRepo] = useState('');
+  const [apiKey, setApiKey] = useState(sessionStorage.getItem('apiKey') || '');
+  const [url, setUrl] = useState(sessionStorage.getItem('url') || '');
+  const [repo, setRepo] = useState(sessionStorage.getItem('repo') || '');
+
+  const updateApiKey = (value: string) => {
+    sessionStorage.setItem('apiKey', value);
+    localStorage.clear();
+    setApiKey(value);
+  };
+  const updateUrl = (value: string) => {
+    sessionStorage.setItem('url', value);
+    localStorage.clear();
+    setUrl(value);
+  };
+  const updateRepo = (value: string) => {
+    sessionStorage.setItem('repo', value);
+    localStorage.clear();
+    setRepo(value);
+  };
 
   return (
     <ApiContext.Provider
       value={{
         apiKey,
-        setApiKey,
+        setApiKey: updateApiKey,
         url,
-        setUrl,
+        setUrl: updateUrl,
         repo,
-        setRepo
+        setRepo: updateRepo
       }}
     >
       {children}
