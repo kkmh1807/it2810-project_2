@@ -3,6 +3,7 @@ import { Issue } from '../types/models';
 import useGitlabData from '../hooks/useGitlabData';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { useApiContext } from '../context/ApiContext';
+import { urlToGitlab } from '../helper/Utils';
 import Selector from './Selector';
 import '../styles/Issues.css';
 
@@ -15,10 +16,6 @@ function Issues() {
 
   const filteredData = filter === 'All issues' ? data : data?.filter((issue) => issue.state === filter);
 
-  function urlToGitlab(endpoint: string, Id: string) {
-    return `${linkData.url}/${decodeURIComponent(linkData.repo)}/-${endpoint}${Id}`;
-  }
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -28,7 +25,7 @@ function Issues() {
       <Selector value={filter} setValue={setFilter} values={states} />
       {filteredData &&
         filteredData.map((issues, i) => (
-          <a key={i} href={urlToGitlab(endpoint, issues.iid.toString())} target="_blank" rel="noreferrer">
+          <a key={i} href={urlToGitlab(linkData, endpoint, issues.iid.toString())} target="_blank" rel="noreferrer">
             <div key={i} className="issues-card">
               <h1>{issues.title}</h1>
               <h2>{issues.state}</h2>

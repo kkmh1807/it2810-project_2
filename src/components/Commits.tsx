@@ -4,6 +4,7 @@ import { Commit } from '../types/models';
 import { useApiContext } from '../context/ApiContext';
 import Selector from './Selector';
 import '../styles/Commits.css';
+import { urlToGitlab } from '../helper/Utils';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 function Commits() {
@@ -16,10 +17,6 @@ function Commits() {
   const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?ref_name=${chosenBranch}`);
   const linkData = useApiContext();
   const endpoint = '/commit/';
-
-  function urlToGitlab(endpoint: string, Id: string) {
-    return `${linkData.url}/${decodeURIComponent(linkData.repo)}/-${endpoint}${Id}`;
-  }
 
   useEffect(() => {
     fetchData();
@@ -38,7 +35,7 @@ function Commits() {
       <div className="card-container">
         {data &&
           data.map((commit, i) => (
-            <a className="card-link" href={urlToGitlab(endpoint, commit.short_id)} key={i} rel="noreferrer" target="_blank">
+            <a className="card-link" href={urlToGitlab(linkData, endpoint, commit.short_id)} key={i} rel="noreferrer" target="_blank">
               <div className="commit-card">
                 <p className="auth-name">{commit.author_name}</p>
                 <p className="title">{commit.title}</p>

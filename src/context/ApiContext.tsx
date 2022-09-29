@@ -4,7 +4,7 @@ interface ApiContextProps {
   children: ReactNode;
 }
 
-interface ApiContextType {
+export interface ApiContextType {
   apiKey: string;
   setApiKey: (val: string) => void;
   url: string;
@@ -13,7 +13,7 @@ interface ApiContextType {
   setRepo: (val: string) => void;
 }
 
-const ApiContext = createContext<ApiContextType>({
+export const ApiContext = createContext<ApiContextType>({
   apiKey: '',
   setApiKey: () => null,
   url: '',
