@@ -4,6 +4,7 @@ import '../styles/MergeRequest.css';
 import { urlToGitlab } from '../helper/Utils';
 import { useApiContext } from '../context/ApiContext';
 import Loader from './Loader';
+import ErrorComponent from './ErrorComponent';
 
 const endpoint = '/merge_requests/';
 
@@ -14,7 +15,7 @@ function MergeRequests() {
 
   if (isLoading) return <Loader />;
 
-  if (isError) return <div>Something went wrong</div>;
+  if (isError) return <ErrorComponent />;
 
   return (
     <div className="Container">

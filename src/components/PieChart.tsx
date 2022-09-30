@@ -3,6 +3,7 @@ import { Commit } from '../types/models';
 import { Pie } from 'react-chartjs-2';
 import { generateColor } from '../utils/utils';
 import Loader from './Loader';
+import ErrorComponent from './ErrorComponent';
 
 const numberOfCommits = 200;
 
@@ -11,7 +12,7 @@ const PieChart = () => {
 
   if (isLoading) return <Loader />;
 
-  if (isError) return <div>Something went wrong</div>;
+  if (isError) return <ErrorComponent />;
 
   if (!data?.length) return <div>No commits were found for this repository</div>;
 

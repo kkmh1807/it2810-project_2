@@ -6,6 +6,7 @@ import '../styles/Commits.css';
 import { urlToGitlab } from '../helper/Utils';
 import useLocalStorage from '../hooks/useLocalStorage';
 import Loader from './Loader';
+import ErrorComponent from './ErrorComponent';
 
 const urlEndpoint = '/commit/';
 
@@ -24,7 +25,7 @@ function Commits() {
 
   if (branches.isLoading || commits.isLoading) return <Loader />;
 
-  if (branches.isError || commits.isError) return <div>Something went wrong</div>;
+  if (branches.isError || commits.isError) return <ErrorComponent />;
 
   return (
     <>

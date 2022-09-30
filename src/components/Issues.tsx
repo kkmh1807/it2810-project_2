@@ -6,6 +6,7 @@ import { urlToGitlab } from '../helper/Utils';
 import Selector from './Selector';
 import '../styles/Issues.css';
 import Loader from './Loader';
+import ErrorComponent from './ErrorComponent';
 
 const endpoint = '/issues/';
 
@@ -20,7 +21,7 @@ function Issues() {
 
   if (isLoading) return <Loader />;
 
-  if (isError) return <div>Something went wrong</div>;
+  if (isError) return <ErrorComponent />;
 
   return (
     <div className="issues-container">
