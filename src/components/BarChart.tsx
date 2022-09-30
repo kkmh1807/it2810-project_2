@@ -22,11 +22,11 @@ const BarChart = () => {
   };
   const [startDate, setStartDate] = useState(subOneMonth(today.substring(0, 10)));
   const [lastDate, setLastDate] = useState(today);
-  const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?since=${startDate}&until=${lastDate}&per_page=200`);
+  const { isLoading, isError, data } = useGitlabData<Commit[]>(`/repository/commits?since=${startDate}&until=${lastDate}&per_page=200`);
 
-  useEffect(() => {
-    fetchData();
-  }, [startDate, lastDate]);
+  if (isLoading) return <div>Loading...</div>;
+
+  if (isError) return <div>Something went wrong</div>;
 
   const reverseString = (str: string) => {
     const [year, month, day] = str.split('-');

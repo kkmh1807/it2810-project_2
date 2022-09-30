@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
 import '../styles/Overview.css';
@@ -10,11 +9,7 @@ import BarChart from './BarChart';
 const numberOfCommits = 500;
 
 const Overview = () => {
-  const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?all=true&per_page=${numberOfCommits}`);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { data } = useGitlabData<Commit[]>(`/repository/commits?all=true&per_page=${numberOfCommits}`);
 
   if (!data) return <div>Oops, no data</div>;
 

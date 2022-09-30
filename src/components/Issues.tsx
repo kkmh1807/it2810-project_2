@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { Issue } from '../types/models';
 import useGitlabData from '../hooks/useGitlabData';
 import useLocalStorage from '../hooks/useLocalStorage';
@@ -8,17 +7,13 @@ import Selector from './Selector';
 import '../styles/Issues.css';
 
 function Issues() {
-  const { data, fetchData } = useGitlabData<Issue[]>('/issues');
+  const { data } = useGitlabData<Issue[]>('/issues');
   const linkData = useApiContext();
   const endpoint = '/issues/';
   const [filter, setFilter] = useLocalStorage('current-issue', 'All issues');
   const states = ['All issues', ...Array.from(new Set(data?.map((issue) => issue.state)))];
 
   const filteredData = filter === 'All issues' ? data : data?.filter((issue) => issue.state === filter);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <div className="issues-container">

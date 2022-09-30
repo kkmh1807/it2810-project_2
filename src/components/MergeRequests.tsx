@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { MR } from '../types/models';
 import useGitlabData from '../hooks/useGitlabData';
 import '../styles/MergeRequest.css';
@@ -6,12 +5,9 @@ import { urlToGitlab } from '../helper/Utils';
 import { useApiContext } from '../context/ApiContext';
 
 function MergeRequests() {
-  const { data, fetchData } = useGitlabData<MR[]>('/merge_requests');
+  const { data } = useGitlabData<MR[]>('/merge_requests');
   const endpoint = '/merge_requests/';
   const Linkdata = useApiContext();
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   return (
     <div className="Container">
