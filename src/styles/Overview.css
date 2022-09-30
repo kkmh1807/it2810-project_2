@@ -17,10 +17,6 @@
   grid-column: 2 / 3;
 }
 
-.line-chart-wrapper {
-  min-width: 320px;
-}
-
 @media only screen and (max-width: 768px) {
   .overview-wrapper {
     display: flex;
