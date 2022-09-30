@@ -2,13 +2,14 @@ import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
 import { Pie } from 'react-chartjs-2';
 import { generateColor } from '../utils/utils';
+import Loader from './Loader';
 
 const numberOfCommits = 200;
 
 const PieChart = () => {
   const { data, isLoading, isError } = useGitlabData<Commit[]>(`/repository/commits?all=true&per_page=${numberOfCommits}`);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
 
   if (isError) return <div>Something went wrong</div>;
 

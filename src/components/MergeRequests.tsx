@@ -3,6 +3,7 @@ import useGitlabData from '../hooks/useGitlabData';
 import '../styles/MergeRequest.css';
 import { urlToGitlab } from '../helper/Utils';
 import { useApiContext } from '../context/ApiContext';
+import Loader from './Loader';
 
 const endpoint = '/merge_requests/';
 
@@ -11,7 +12,7 @@ function MergeRequests() {
 
   const { data, isLoading, isError } = useGitlabData<MR[]>(endpoint);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
 
   if (isError) return <div>Something went wrong</div>;
 

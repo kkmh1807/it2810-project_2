@@ -5,6 +5,7 @@ import Selector from './Selector';
 import '../styles/Commits.css';
 import { urlToGitlab } from '../helper/Utils';
 import useLocalStorage from '../hooks/useLocalStorage';
+import Loader from './Loader';
 
 const urlEndpoint = '/commit/';
 
@@ -21,7 +22,7 @@ function Commits() {
 
   const commits = useGitlabData<Commit[]>(`/repository/commits?ref_name=${'asdlasdklasdjasdjk'}`);
 
-  if (branches.isLoading || commits.isLoading) return <div>Loading...</div>;
+  if (branches.isLoading || commits.isLoading) return <Loader />;
 
   if (branches.isError || commits.isError) return <div>Something went wrong</div>;
 

@@ -5,6 +5,7 @@ import { useApiContext } from '../context/ApiContext';
 import { urlToGitlab } from '../helper/Utils';
 import Selector from './Selector';
 import '../styles/Issues.css';
+import Loader from './Loader';
 
 const endpoint = '/issues/';
 
@@ -17,7 +18,7 @@ function Issues() {
   const states = ['All issues', ...Array.from(new Set(data?.map((issue) => issue.state)))];
   const filteredData = filter === 'All issues' ? data : data?.filter((issue) => issue.state === filter);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
 
   if (isError) return <div>Something went wrong</div>;
 
