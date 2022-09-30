@@ -2,9 +2,24 @@ import { useEffect, useState } from 'react';
 import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
 import { Line } from 'react-chartjs-2';
+import '../styles/LineChart.css';
 const LineChart = () => {
   const today = new Date(Date.now()).toISOString();
-  const [startDate, setstartDate] = useState(today);
+
+  const subOneMonth = (str: string) => {
+    const monthStr = str.substring(5, 7);
+    let monthInt = parseInt(monthStr);
+    let newMonth = '';
+    monthInt -= 1;
+    if (monthInt < 10) {
+      newMonth = '0' + monthInt + '';
+    } else {
+      newMonth = '' + monthInt + '';
+    }
+
+    return '' + str.substring(0, 5) + newMonth + str.substring(7, 10);
+  };
+  const [startDate, setStartDate] = useState(subOneMonth(today.substring(0, 10)));
   const [lastDate, setLastDate] = useState(today);
   const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?first_parent=true&since=${startDate}&until=${lastDate}`);
 
@@ -35,10 +50,16 @@ const LineChart = () => {
 
   return (
     <div className="line-chart-wrapper">
-      <p>From:</p>
-      <input type="date" defaultValue={startDate.substring(0, 10)} onChange={(e) => setstartDate(e.target.value)} />
-      <p>To:</p>
-      <input type="date" defaultValue={lastDate.substring(0, 10)} onChange={(e) => setLastDate(e.target.value)} />
+      <div className="date-wrapper">
+        <div id="from">
+          <p>From:</p>
+          <input type="date" defaultValue={startDate.substring(0, 10)} onChange={(e) => setStartDate(e.target.value)} />
+        </div>
+        <div id="to">
+          <p>To:</p>
+          <input type="date" defaultValue={lastDate.substring(0, 10)} onChange={(e) => setLastDate(e.target.value)} />
+        </div>
+      </div>
       <Line
         data={{
           labels: Object.keys(lineChartData),

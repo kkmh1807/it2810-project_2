@@ -1,0 +1,28 @@
+.date-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#to {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 50%;
+}
+
+#to > p {
+  margin-right: 5%;
+}
+
+#from > p {
+  margin-right: 5%;
+}
+
+#from {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 50%;
+}
