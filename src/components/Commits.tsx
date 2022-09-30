@@ -19,7 +19,11 @@ function Commits() {
     branches.data?.find((branch) => branch.default)?.name as string
   );
 
-  const { data } = useGitlabData<Commit[]>(`/repository/commits?ref_name=${chosenBranch}`);
+  const commits = useGitlabData<Commit[]>(`/repository/commits?ref_name=${'asdlasdklasdjasdjk'}`);
+
+  if (branches.isLoading || commits.isLoading) return <div>Loading...</div>;
+
+  if (branches.isError || commits.isError) return <div>Something went wrong</div>;
 
   return (
     <>
@@ -28,7 +32,21 @@ function Commits() {
         <Selector value={chosenBranch} setValue={setChosenBranch} values={branchNames} />
       </h1>
       <div className="card-container">
-        {data &&
+        {commits.data?.length ? (
+          commits.data.map((commit, i) => (
+            <a className="card-link" href={urlToGitlab(linkData, urlEndpoint, commit.short_id)} key={i} rel="noreferrer" target="_blank">
+              <div className="commit-card">
+                <p className="auth-name">{commit.author_name}</p>
+                <p className="title">{commit.title}</p>
+                <p className="short-id">{commit.short_id}</p>
+                <p className="commit-date">{commit.committed_date.substring(0, 10)}</p>
+              </div>
+            </a>
+          ))
+        ) : (
+          <div>No commits found on this branch</div>
+        )}
+        {/* {data &&
           data.map((commit, i) => (
             <a className="card-link" href={urlToGitlab(linkData, urlEndpoint, commit.short_id)} key={i} rel="noreferrer" target="_blank">
               <div className="commit-card">
@@ -38,7 +56,7 @@ function Commits() {
                 <p className="commit-date">{commit.committed_date.substring(0, 10)}</p>
               </div>
             </a>
-          ))}
+          ))} */}
       </div>
     </>
   );
