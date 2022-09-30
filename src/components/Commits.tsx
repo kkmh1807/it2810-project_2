@@ -21,7 +21,7 @@ function Commits() {
     branches.data?.find((branch) => branch.default)?.name as string
   );
 
-  const commits = useGitlabData<Commit[]>(`/repository/commits?ref_name=${'asdlasdklasdjasdjk'}`);
+  const commits = useGitlabData<Commit[]>(`/repository/commits?ref_name=${chosenBranch}`);
 
   if (branches.isLoading || commits.isLoading) return <Loader />;
 
