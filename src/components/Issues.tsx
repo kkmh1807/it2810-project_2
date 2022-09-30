@@ -6,19 +6,25 @@ import { urlToGitlab } from '../helper/Utils';
 import Selector from './Selector';
 import '../styles/Issues.css';
 
-function Issues() {
-  const { data } = useGitlabData<Issue[]>('/issues');
-  const linkData = useApiContext();
-  const endpoint = '/issues/';
-  const [filter, setFilter] = useLocalStorage('current-issue', 'All issues');
-  const states = ['All issues', ...Array.from(new Set(data?.map((issue) => issue.state)))];
+const endpoint = '/issues/';
 
+function Issues() {
+  const linkData = useApiContext();
+  const [filter, setFilter] = useLocalStorage('current-issue', 'All issues');
+
+  const { data, isLoading, isError } = useGitlabData<Issue[]>(endpoint);
+
+  const states = ['All issues', ...Array.from(new Set(data?.map((issue) => issue.state)))];
   const filteredData = filter === 'All issues' ? data : data?.filter((issue) => issue.state === filter);
+
+  if (isLoading) return <div>Loading...</div>;
+
+  if (isError) return <div>Something went wrong</div>;
 
   return (
     <div className="issues-container">
       <Selector value={filter} setValue={setFilter} values={states} />
-      {filteredData &&
+      {filteredData?.length ? (
         filteredData.map((issues, i) => (
           <a key={i} href={urlToGitlab(linkData, endpoint, issues.iid.toString())} target="_blank" rel="noreferrer">
             <div key={i} className="issues-card">
@@ -31,7 +37,10 @@ function Issues() {
               </p>
             </div>
           </a>
-        ))}
+        ))
+      ) : (
+        <div>No issues found for this repository</div>
+      )}
     </div>
   );
 }
