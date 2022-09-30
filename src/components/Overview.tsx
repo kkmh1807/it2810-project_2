@@ -1,12 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
 import '../styles/Overview.css';
-import { Pie } from 'react-chartjs-2';
+import { Pie, Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { generateColor } from '../utils/utils';
+import Commits from './Commits';
+import LineChart from './LineChart';
 
-const numberOfCommits = 200;
+const numberOfCommits = 500;
 
 const Overview = () => {
   const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?all=true&per_page=${numberOfCommits}`);
@@ -47,7 +49,7 @@ const Overview = () => {
           }}
         />
       </div>
-      <div className="line-chart-wrapper">JAKOB PUTT LINE CHART HER</div>
+      <LineChart />
     </div>
   );
 };
