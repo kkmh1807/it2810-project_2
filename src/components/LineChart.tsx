@@ -27,19 +27,17 @@ const LineChart = () => {
     fetchData();
   }, [startDate, lastDate]);
 
-  /* fiks reverseString */
-  /* const reverseString = (str: string) => {
-    let newString = '';
-    for (let i = str.length - 1; i >= 0; i--) {
-      newString += str[i];
-    }
-    return newString;
-  }; */
+  const reverseString = (str: string) => {
+    const [year, month, day] = str.split('-');
+
+    const result = [day, month, year].join('-');
+    return result;
+  };
 
   if (!data) return <div>Oops, no data</div>;
 
   const lineChartData = data.reduce((data, commit) => {
-    const reversedDate = commit.committed_date.substring(0, 10); /* reverseString */
+    const reversedDate = reverseString(commit.committed_date.substring(0, 10));
     if (data[reversedDate]) {
       data[reversedDate]++;
     } else {
