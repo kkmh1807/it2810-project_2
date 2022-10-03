@@ -3,9 +3,6 @@ import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
 import { Line } from 'react-chartjs-2';
 import '../styles/LineChart.css';
-import { isTypeElement } from 'typescript';
-import { isTypedArray } from 'util/types';
-import Commits from './Commits';
 const LineChart = () => {
   const today = new Date(Date.now()).toISOString();
 
@@ -50,7 +47,6 @@ const LineChart = () => {
   }, {} as Record<Commit['committed_date'], number>);
 
   const labels = Object.keys(lineChartData);
-  console.log(lineChartData);
   return (
     <div className="line-chart-wrapper">
       <div className="date-wrapper">
@@ -65,7 +61,6 @@ const LineChart = () => {
       </div>
       <Line
         data={{
-          /* TRENGER RADIX SORT HER FOR Å SORTERE RIKTIG? */
           labels: labels.reverse(),
           datasets: [
             {
