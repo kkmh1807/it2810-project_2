@@ -17,6 +17,7 @@ const PieChart = () => {
 
   if (!data?.length) return <div>No commits were found for this repository</div>;
 
+  // Maps the data array to an object containing the number of commits pr author
   const chartData = data.reduce((data, commit) => {
     if (data[commit.author_name]) {
       data[commit.author_name]++;
@@ -28,7 +29,7 @@ const PieChart = () => {
 
   return (
     <div className="pie-chart-wrapper">
-      <p>Commits statistics for the last {numberOfCommits} commits in the repository</p>
+      <h1>Commits statistics for the last {numberOfCommits} commits in the repository</h1>
       <Pie
         data={{
           labels: Object.keys(chartData),

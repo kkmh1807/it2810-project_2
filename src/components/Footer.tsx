@@ -2,6 +2,7 @@ import React from 'react';
 import LogoIcon from '../assets/icons/logo.svg';
 import '../styles/Footer.css';
 
+//Footer for every page.
 const Footer = () => {
   return (
     <div className="footer">
