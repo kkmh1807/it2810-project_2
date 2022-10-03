@@ -44,7 +44,6 @@ const LineChart = () => {
     } else {
       data[reversedDate] = 1;
     }
-    console.log(data);
     return data;
   }, {} as Record<Commit['committed_date'], number>);
 
