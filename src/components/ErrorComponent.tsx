@@ -5,7 +5,7 @@ const ErrorComponent = () => {
   return (
     <div className="error-component">
       <img src={LogoIcon} alt="Logo" />
-      <span>Looks like something went wrong ☹️</span>
+      <span>Failed to connect to GitLab</span>
     </div>
   );
 };
