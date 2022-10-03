@@ -1,6 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import { useApiContext } from '../context/ApiContext';
 import { useNavigate } from 'react-router-dom';
+import InputField from './InputField';
 import Logo from '../assets/images/logo_text.svg';
 import '../styles/Home.css';
 
@@ -45,23 +46,9 @@ function Home() {
       <img src={Logo} />
       <form onSubmit={(e) => setContext(e)}>
         <label htmlFor="apiInput">Enter your API-key</label>
-        <input
-          id="apiInput"
-          type="text"
-          placeholder="<your_access_token>"
-          pattern="glpat-[A-Za-z0-9_-]{20}"
-          onChange={(e) => setApiKey(e.target.value)}
-          required
-        />
+        <InputField placeholder="<your_access_token>" regexPattern="glpat-[A-Za-z0-9_-]{20}" setter={setApiKey} />
         <label htmlFor="apiInURLInputput">Enter your URL</label>
-        <input
-          id="URLInput"
-          type="text"
-          placeholder="https://gitlab.your.repo.domain/projectName"
-          pattern="https://gitlab\..*/.*"
-          onChange={(e) => stripRepo(e.target.value)}
-          required
-        />
+        <InputField placeholder="https://gitlab.your.repo.domain/projectName" regexPattern="https://gitlab\..*/.*" setter={stripRepo} />
         <button type="submit" className="start-btn">
           Start Browsing
         </button>

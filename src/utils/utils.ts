@@ -8,7 +8,7 @@ export function generateColor(num: number) {
       while (colorArray.indexOf(color) > -1) {
         color = newColor();
       }
-      colorArray.push(color);
+      colorArray.push(color);  
     }
     return colorArray;
   } else {
