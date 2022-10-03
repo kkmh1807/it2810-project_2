@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Selector from './Selector';
+import Selector from '../Selector';
 
 const mockValues = ['option1', 'option2', 'option3', 'option4', 'option5'];
 const mockSetter = jest.fn();

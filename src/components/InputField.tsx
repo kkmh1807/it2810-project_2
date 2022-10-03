@@ -2,8 +2,8 @@ import React from 'react';
 import '../styles/InputField.css';
 
 interface InputFieldProps {
-  placeholder: string;
-  regexPattern: string;
+  placeholder?: string;
+  regexPattern?: string;
   setter: (val: string) => void;
 }
 
