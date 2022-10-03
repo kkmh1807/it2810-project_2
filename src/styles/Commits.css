@@ -19,11 +19,9 @@
   flex-wrap: wrap;
   justify-content: center;
   flex-basis: 20%;
-  height: fit-content;
+  height: 200px;
   padding: 2%;
-  min-height: 186px;
-  min-width: 330px;
-  max-width: 330px;
+  width: 330px;
 }
 
 .commit-card:hover {
