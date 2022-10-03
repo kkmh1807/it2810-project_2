@@ -4,6 +4,7 @@ import { Pie } from 'react-chartjs-2';
 import { generateColor } from '../utils/utils';
 import Loader from './Loader';
 import ErrorComponent from './ErrorComponent';
+import '../styles/PieChart.css';
 
 const numberOfCommits = 200;
 

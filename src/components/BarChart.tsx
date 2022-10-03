@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
 import { Bar } from 'react-chartjs-2';
+import Loader from './Loader';
+import ErrorComponent from './ErrorComponent';
 import '../styles/BarChart.css';
 
 const BarChart = () => {
@@ -22,11 +24,12 @@ const BarChart = () => {
   };
   const [startDate, setStartDate] = useState(subOneMonth(today.substring(0, 10)));
   const [lastDate, setLastDate] = useState(today);
+
   const { isLoading, isError, data } = useGitlabData<Commit[]>(`/repository/commits?since=${startDate}&until=${lastDate}&per_page=200`);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
 
-  if (isError) return <div>Something went wrong</div>;
+  if (isError) return <ErrorComponent />;
 
   const reverseString = (str: string) => {
     const [year, month, day] = str.split('-');
@@ -65,7 +68,6 @@ const BarChart = () => {
           datasets: [
             {
               label: `Number of commits`,
-
               backgroundColor: '#fc6d26',
               borderColor: '#fc6d26',
               data: Object.values(lineChartData).reverse()
