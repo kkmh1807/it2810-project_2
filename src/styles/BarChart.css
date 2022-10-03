@@ -1,5 +1,6 @@
 .bar-chart-wrapper {
-  min-width: 320px;
+  min-width: 300px;
+  text-align: center;
 }
 
 .date-wrapper {

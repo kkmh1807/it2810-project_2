@@ -72,11 +72,11 @@
   .page-header {
     flex-direction: column;
     align-items: center;
-    padding: 1rem;
   }
 
   .tab-view {
     --view-padding: 0;
+    width: 100%;
   }
 
   .current-tab {
