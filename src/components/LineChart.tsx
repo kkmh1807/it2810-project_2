@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
-import { Line } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 import '../styles/LineChart.css';
+
 const LineChart = () => {
   const today = new Date(Date.now()).toISOString();
 
@@ -21,7 +22,7 @@ const LineChart = () => {
   };
   const [startDate, setStartDate] = useState(subOneMonth(today.substring(0, 10)));
   const [lastDate, setLastDate] = useState(today);
-  const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?first_parent=true&since=${startDate}&until=${lastDate}`);
+  const { data, fetchData } = useGitlabData<Commit[]>(`/repository/commits?since=${startDate}&until=${lastDate}&per_page=200`);
 
   useEffect(() => {
     fetchData();
@@ -43,10 +44,10 @@ const LineChart = () => {
     } else {
       data[reversedDate] = 1;
     }
+    console.log(data);
     return data;
   }, {} as Record<Commit['committed_date'], number>);
 
-  const labels = Object.keys(lineChartData);
   return (
     <div className="line-chart-wrapper">
       <div className="date-wrapper">
@@ -59,13 +60,13 @@ const LineChart = () => {
           <input type="date" defaultValue={lastDate.substring(0, 10)} onChange={(e) => setLastDate(e.target.value)} />
         </div>
       </div>
-      <Line
+      <Bar
         data={{
-          labels: labels.reverse(),
+          labels: Object.keys(lineChartData).reverse(),
           datasets: [
             {
               label: `Number of commits`,
-              fill: false,
+
               backgroundColor: '#fc6d26',
               borderColor: '#fc6d26',
               data: Object.values(lineChartData).reverse()
