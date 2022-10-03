@@ -1,10 +1,10 @@
 import { MR } from '../types/models';
 import useGitlabData from '../hooks/useGitlabData';
 import '../styles/MergeRequest.css';
-import { urlToGitlab } from '../helper/Utils';
+import { urlToGitlab } from '../utils/utils';
 import { useApiContext } from '../context/ApiContext';
-import Loader from './Loader';
-import ErrorComponent from './ErrorComponent';
+import Loader from '../components/Loader';
+import ErrorComponent from '../components/ErrorComponent';
 
 const endpoint = '/merge_requests/';
 

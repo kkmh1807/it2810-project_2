@@ -1,7 +1,7 @@
 import React, { useState, FormEvent } from 'react';
 import { useApiContext } from '../context/ApiContext';
 import { useNavigate } from 'react-router-dom';
-import InputField from './InputField';
+import InputField from '../components/InputField';
 import Logo from '../assets/images/logo_text.svg';
 import '../styles/Home.css';
 
