@@ -25,13 +25,19 @@ export const ApiContext = createContext<ApiContextType>({
 export const useApiContext = (): ApiContextType => useContext(ApiContext);
 
 const ApiContextProvider = ({ children }: ApiContextProps) => {
+  // Set state for apiKey, url and repo, with default begin saved session storage values if they exist
   const [apiKey, setApiKey] = useState(sessionStorage.getItem('apiKey') || '');
   const [url, setUrl] = useState(sessionStorage.getItem('url') || '');
   const [repo, setRepo] = useState(sessionStorage.getItem('repo') || '');
 
+  // Custom setter for each of the context values
   const updateApiKey = (value: string) => {
+    // Store the value to session storage
     sessionStorage.setItem('apiKey', value);
+    // Local storage values, e.g branch name for filtering, are related
+    // to current api configuration, so we clear them when the api context is updated
     localStorage.clear();
+    // Set the value to the state
     setApiKey(value);
   };
   const updateUrl = (value: string) => {

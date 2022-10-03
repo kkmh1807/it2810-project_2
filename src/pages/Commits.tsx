@@ -1,12 +1,12 @@
 import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
 import { useApiContext } from '../context/ApiContext';
-import Selector from './Selector';
+import Selector from '../components/Selector';
 import '../styles/Commits.css';
-import { urlToGitlab } from '../helper/Utils';
+import { urlToGitlab } from '../utils/utils';
 import useLocalStorage from '../hooks/useLocalStorage';
-import Loader from './Loader';
-import ErrorComponent from './ErrorComponent';
+import Loader from '../components/Loader';
+import ErrorComponent from '../components/ErrorComponent';
 
 const urlEndpoint = '/commit/';
 

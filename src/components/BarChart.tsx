@@ -1,29 +1,40 @@
-import { useState } from 'react';
 import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
 import { Bar } from 'react-chartjs-2';
 import Loader from './Loader';
 import ErrorComponent from './ErrorComponent';
 import '../styles/BarChart.css';
+import useLocalStorage from '../hooks/useLocalStorage';
 
+// Helper method to get default one month back.
+const substractOneMonth = (str: string) => {
+  const monthStr = str.substring(5, 7);
+  let monthInt = parseInt(monthStr);
+  let newMonth = '';
+  monthInt -= 1;
+  if (monthInt < 10) {
+    newMonth = '0' + monthInt + '';
+  } else {
+    newMonth = '' + monthInt + '';
+  }
+
+  return '' + str.substring(0, 5) + newMonth + str.substring(7, 10);
+};
+
+// Helper method
+const reverseString = (str: string) => {
+  const [year, month, day] = str.split('-');
+
+  const result = [day, month, year].join('-');
+  return result;
+};
+
+//Gets every commit between selected dates and displays them in a bar chart
 const BarChart = () => {
   const today = new Date(Date.now()).toISOString();
 
-  const subOneMonth = (str: string) => {
-    const monthStr = str.substring(5, 7);
-    let monthInt = parseInt(monthStr);
-    let newMonth = '';
-    monthInt -= 1;
-    if (monthInt < 10) {
-      newMonth = '0' + monthInt + '';
-    } else {
-      newMonth = '' + monthInt + '';
-    }
-
-    return '' + str.substring(0, 5) + newMonth + str.substring(7, 10);
-  };
-  const [startDate, setStartDate] = useState(subOneMonth(today.substring(0, 10)));
-  const [lastDate, setLastDate] = useState(today);
+  const [startDate, setStartDate] = useLocalStorage('start-date', substractOneMonth(today.substring(0, 10)));
+  const [lastDate, setLastDate] = useLocalStorage('endDate', today);
 
   const { isLoading, isError, data } = useGitlabData<Commit[]>(`/repository/commits?since=${startDate}&until=${lastDate}&per_page=200`);
 
@@ -31,15 +42,9 @@ const BarChart = () => {
 
   if (isError) return <ErrorComponent />;
 
-  const reverseString = (str: string) => {
-    const [year, month, day] = str.split('-');
+  if (!data?.length) return <div>No commits were found for this repository</div>;
 
-    const result = [day, month, year].join('-');
-    return result;
-  };
-
-  if (!data) return <div>Oops, no data</div>;
-
+  // Maps the date of every commit and counts the number of commits at this date.
   const lineChartData = data.reduce((data, commit) => {
     const reversedDate = reverseString(commit.committed_date.substring(0, 10));
     if (data[reversedDate]) {
@@ -51,7 +56,8 @@ const BarChart = () => {
   }, {} as Record<Commit['committed_date'], number>);
 
   return (
-    <div className="line-chart-wrapper">
+    <div className="bar-chart-wrapper">
+      <h1>Commits per day</h1>
       <div className="date-wrapper">
         <div id="from">
           <p>From:</p>

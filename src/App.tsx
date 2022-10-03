@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Home from './components/Home';
+import Home from './pages/Home';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ApiContextProvider from './context/ApiContext';
-import Commits from './components/Commits';
-import MergeRequests from './components/MergeRequests';
-import Issues from './components/Issues';
-import Overview from './components/Overview';
+import Commits from './pages/Commits';
+import MergeRequests from './pages/MergeRequests';
+import Issues from './pages/Issues';
+import Overview from './pages/Overview';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 

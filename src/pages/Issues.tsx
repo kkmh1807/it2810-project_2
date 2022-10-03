@@ -2,11 +2,11 @@ import { Issue } from '../types/models';
 import useGitlabData from '../hooks/useGitlabData';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { useApiContext } from '../context/ApiContext';
-import { urlToGitlab } from '../helper/Utils';
-import Selector from './Selector';
+import { urlToGitlab } from '../utils/utils';
+import Selector from '../components/Selector';
 import '../styles/Issues.css';
-import Loader from './Loader';
-import ErrorComponent from './ErrorComponent';
+import Loader from '../components/Loader';
+import ErrorComponent from '../components/ErrorComponent';
 
 const endpoint = '/issues/';
 
