@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
 import '../styles/Overview.css';
-import { Pie, Line } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { generateColor } from '../utils/utils';
-import Commits from './Commits';
-import LineChart from './LineChart';
+import BarChart from './BarChart';
 
 const numberOfCommits = 500;
 
@@ -49,7 +48,7 @@ const Overview = () => {
           }}
         />
       </div>
-      <LineChart />
+      <BarChart />
     </div>
   );
 };

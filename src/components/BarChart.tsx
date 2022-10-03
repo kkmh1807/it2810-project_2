@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import useGitlabData from '../hooks/useGitlabData';
 import { Commit } from '../types/models';
-import { Bar, Line } from 'react-chartjs-2';
-import '../styles/LineChart.css';
+import { Bar } from 'react-chartjs-2';
+import '../styles/BarChart.css';
 
-const LineChart = () => {
+const BarChart = () => {
   const today = new Date(Date.now()).toISOString();
 
   const subOneMonth = (str: string) => {
@@ -77,4 +77,4 @@ const LineChart = () => {
   );
 };
 
-export default LineChart;
+export default BarChart;
