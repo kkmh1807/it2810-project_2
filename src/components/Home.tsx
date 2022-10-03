@@ -5,9 +5,11 @@ import Logo from '../assets/images/logo_text.svg';
 import '../styles/Home.css';
 
 function Home() {
-  const { setApiKey, setUrl, setRepo } = useApiContext();
+  const { apiKey, setApiKey, setUrl, setRepo } = useApiContext();
   const [strippedUrl, setStrippedUrl] = useState('');
   const [strippedRepo, setStrippedRepo] = useState('');
+  const [showError, setShowError] = useState(false);
+
   const navigate = useNavigate();
 
   //   Strip the repo from input from user
@@ -17,14 +19,23 @@ function Home() {
     for (let i = 4; i < input.split('/').length; i++) {
       repo = repo + '/' + input.split('/')[i];
     }
-    setStrippedRepo(repo);
+    setStrippedRepo(encodeURIComponent(repo));
   }
 
-  const setContext = (e: FormEvent) => {
+  const setContext = async (e: FormEvent) => {
+    setShowError(false);
     // Set the input from the user into application context.
     e.preventDefault();
-    setRepo(encodeURIComponent(strippedRepo));
+    const response = await fetch(`${strippedUrl}/api/v4/projects/${strippedRepo}/repository/branches`, {
+      headers: {
+        Authorization: `Bearer ${apiKey} `
+      }
+    });
+
+    if (!response.ok) return setShowError(true);
+
     setUrl(strippedUrl);
+    setRepo(strippedRepo);
 
     navigate('/overview');
   };
@@ -54,6 +65,7 @@ function Home() {
         <button type="submit" className="start-btn">
           Start Browsing
         </button>
+        {showError && <div className="invalid-data">The data you entered is not valid</div>}
       </form>
     </div>
   );

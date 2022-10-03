@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { Issue } from '../types/models';
 import useGitlabData from '../hooks/useGitlabData';
 import useLocalStorage from '../hooks/useLocalStorage';
@@ -6,24 +5,28 @@ import { useApiContext } from '../context/ApiContext';
 import { urlToGitlab } from '../helper/Utils';
 import Selector from './Selector';
 import '../styles/Issues.css';
+import Loader from './Loader';
+import ErrorComponent from './ErrorComponent';
+
+const endpoint = '/issues/';
 
 function Issues() {
-  const { data, fetchData } = useGitlabData<Issue[]>('/issues');
   const linkData = useApiContext();
-  const endpoint = '/issues/';
   const [filter, setFilter] = useLocalStorage('current-issue', 'All issues');
-  const states = ['All issues', ...Array.from(new Set(data?.map((issue) => issue.state)))];
 
+  const { data, isLoading, isError } = useGitlabData<Issue[]>(endpoint);
+
+  const states = ['All issues', ...Array.from(new Set(data?.map((issue) => issue.state)))];
   const filteredData = filter === 'All issues' ? data : data?.filter((issue) => issue.state === filter);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  if (isLoading) return <Loader />;
+
+  if (isError) return <ErrorComponent />;
 
   return (
     <div className="issues-container">
       <Selector value={filter} setValue={setFilter} values={states} />
-      {filteredData &&
+      {filteredData?.length ? (
         filteredData.map((issues, i) => (
           <a key={i} href={urlToGitlab(linkData, endpoint, issues.iid.toString())} target="_blank" rel="noreferrer">
             <div key={i} className="issues-card">
@@ -36,7 +39,10 @@ function Issues() {
               </p>
             </div>
           </a>
-        ))}
+        ))
+      ) : (
+        <div>No issues found for this repository</div>
+      )}
     </div>
   );
 }
