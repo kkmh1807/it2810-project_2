@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+# Context API
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Appen er pakken inn i en kontekst som tar vare på prosjekt og api-nøkkel etter at brukeren har fylt inn informasjonen. Dette gir oss en overordnet lagringsplass for denne informasjonen, slik at de komponentene som har behov for det kan hente dataen fra hvor som helst i applikasjonen.
 
-## Available Scripts
+# HTML Web Storage
 
-In the project directory, you can run:
+## LocalStorage
 
-### `npm start`
+LocalStorage brukes for å lagre filtreringsalternativer til de ulike sidene. Dette er informasjon som er nyttig å lagre mellom sesjoner, og siden dette ikke er sensitiv informasjon er det greit å lagre den uten levetid.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Session
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Session storage er brukt for å lagre API konfigurasjonen fra konteksen. Det gjør det mulig å oppdatere (refreshe) nettisden uten at dataen blir borte, samtidig som sensitiv informasjon slik som api nøkkel ikke lagres over lengre tid.
 
-### `npm test`
+Man kunne dermed benyttet seg av kontekst på en annen måte enn å lagre dataen dobbelt opp, for eksempel mørk modus for applikasjonen. Løsningen ville da ha vært annerledes. Man kunne lagret inputet direkte fra bruker i session storage og komponentene måtte ha hentet opp den lagrede dataen hver gang. Vi føler likevel at det var enklest å bruke context APIet på valgt måte som en slags mellomlagring av den nødvendige dataen.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Ajax
 
-### `npm run build`
+For å hente data til applikasjonen valgte vi å bruke den innebygde `fetch` metoden i JavaScript. Mens den er relativt enkel, tilbyr tredjeparts biblioteker slik som Axios ekstra funksjonalitet slik som avbryting og avskjæring av forespørsler. Vi mener denne appen ikke er så komplisert at det er behov for slike ting, og vi mener derfor at `fetch` er tilstrekkelig
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Komponenter
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Vi har i hovedsak fokusert på funksjonelle komponenter og pilfunksjon komponenter. Pilfunksjon komponenter gjør det enklere å sette på typer. I henhold til kravene har vi implementert Selectorkomponenten som en klassebasert komponent.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Filstruktur
 
-### `npm run eject`
+Vi har valgt en standard filstruktur som skiller sider (pages), sideelementer (komponenter), stiler, hjelpemetoder,ressurser (assets), hooks, types og context.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Elementer
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Viewport
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Viewport meta tagen er inkludert som standard via `create-react-app`. I tillegg har vi enkelte steder brukt `vh` og `vw` enhetene i css for å tilpasse størrelsen på elementer etter skjermen
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Media Queries
 
-## Learn More
+Media queries er tatt i bruk for å gjøre nettsiden responsiv, og er brukt overalt hvor størrelse-spesifikk styling er nødvendig. Siden har to forskjellige breakpoints; 320px for mobil og 768px for nettbrett.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Skalerende bilde
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Vi har et generisk bilde som skal representere en gruppe som jobber flittig med et prosjekt på gitlab. Bilde skaleres med størrelsen på siden, og har en minimums bredde på 300px.
+
+## Fleksibel layout
+
+Vi brukte i hovedsak flexbox da dette enkelt ga oss et fint og flytende layout på siden. På noen av sideelementene var det hensiktsmessig å bruke css-grid. Vi brukte grid på overview siden, for kakediagrammet og på sidene som viser issues og merge-requests. Vi valgte å bruke grid for å enkelt kunne plassere de ulike elementene i kolonner så vi kunne unngå at side-elementene fløt om hverandre.
+
+# Testing
+
+React testing library er brukt til å teste enkeltkomponenter som Selector og InputField. Vi rendrer komponentene med test verdier og sjekker at komponenten ser ut og fungerer som tenkt.
+
+Vi har gjennomført testing på mindre skjermer både gjennom utviklerverktøyet til Chrome og på våre egne mobile enheter. Vi har testet på iPad air med 10,9 tommer skjerm, Huawei p20 pro med 6,1 tommer og Samsung S21 med 6,2 tommer.
