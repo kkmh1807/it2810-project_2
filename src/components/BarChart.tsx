@@ -42,10 +42,8 @@ const BarChart = () => {
 
   if (isError) return <ErrorComponent />;
 
-  if (!data?.length) return <div>No commits were found for this repository</div>;
-
   // Maps the date of every commit and counts the number of commits at this date.
-  const lineChartData = data.reduce((data, commit) => {
+  const lineChartData = (data || []).reduce((data, commit) => {
     const reversedDate = reverseString(commit.committed_date.substring(0, 10));
     if (data[reversedDate]) {
       data[reversedDate] += 1;
@@ -68,19 +66,23 @@ const BarChart = () => {
           <input type="date" defaultValue={lastDate.substring(0, 10)} onChange={(e) => setLastDate(e.target.value)} />
         </div>
       </div>
-      <Bar
-        data={{
-          labels: Object.keys(lineChartData).reverse(),
-          datasets: [
-            {
-              label: `Number of commits`,
-              backgroundColor: '#fc6d26',
-              borderColor: '#fc6d26',
-              data: Object.values(lineChartData).reverse()
-            }
-          ]
-        }}
-      />
+      {data?.length ? (
+        <Bar
+          data={{
+            labels: Object.keys(lineChartData).reverse(),
+            datasets: [
+              {
+                label: `Number of commits`,
+                backgroundColor: '#fc6d26',
+                borderColor: '#fc6d26',
+                data: Object.values(lineChartData).reverse()
+              }
+            ]
+          }}
+        />
+      ) : (
+        <h1 id="message-error">No commits were found for this repository</h1>
+      )}
     </div>
   );
 };

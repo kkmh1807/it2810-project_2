@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Home from './pages/Home';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import ApiContextProvider from './context/ApiContext';
 import Commits from './pages/Commits';
 import MergeRequests from './pages/MergeRequests';
@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <ApiContextProvider>
           <Routes>
             <Route path="/" element={<Home />}></Route>
@@ -51,7 +51,7 @@ function App() {
             ></Route>
           </Routes>
         </ApiContextProvider>
-      </BrowserRouter>
+      </HashRouter>
       <Footer />
     </>
   );
