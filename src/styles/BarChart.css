@@ -31,3 +31,9 @@
   align-items: center;
   flex-basis: 50%;
 }
+
+/* CSS for invalid date input on barchart */
+
+#message-error {
+  text-align: center;
+}

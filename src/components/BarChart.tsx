@@ -81,7 +81,7 @@ const BarChart = () => {
           }}
         />
       ) : (
-        <div>No commits were found for this time period</div>
+        <h1 id="message-error">No commits were found for this repository</h1>
       )}
     </div>
   );
